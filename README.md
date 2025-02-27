@@ -1,4 +1,4 @@
-# zen-code-vue
+# dynamic blocks
 
 ## Project setup
 ```
