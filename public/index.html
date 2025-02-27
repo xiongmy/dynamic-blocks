@@ -4,8 +4,46 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title><%= htmlWebpackPlugin.options.title %></title>
+    <title>Dynamic Blocks</title>
+    <!-- highlight相关使用 -->
+	<link rel="stylesheet" href="./static/monokai.min.css">
+	<script src="./static/highlight.min.js"></script>
+	<script src="./static/line-number.js"></script>
+	<script src="./static/lua.min.js"></script>
+
+	<!-- pako解压缩库 -->
+	<script src="./static/pako.min.js"></script>
+	<!-- npm run prepulish 生成的blockly -->
+	<script src="./blockly_compressed_vertical.js"></script>
+	<!-- 默认的一些blockly库 -->
+	<script src="./static/messages.js"></script>
+	<script src="./static/scratch_msgs.js"></script>
+	<script src="./static/vertical/vertical_extensions.js"></script>
+	<script src="./static/common/math.js"></script>
+	<script src="./static/common/text.js"></script>
+	<script src="./static/vertical/procedures.js"></script>
+	<!-- 自定义的一些模块 -->
+	<script src="./selfblocks/controls.js"></script>
+	<script src="./selfblocks/events.js"></script>
+	<script src="./selfblocks/motion.js"></script>
+	<script src="./selfblocks/sensing.js"></script>
+	<script src="./selfblocks/operator.js"></script>
+	<script src="./selfblocks/data.js"></script>
+	<script src="./tool-box-xml.js"></script>
+	<script src="./setting.js"></script>
+	<script src='./stringUtils.js'>
+	</script>
+	<!-- lua代码生成解析库 -->
+	<script src="./lua/lua.js"></script>
+	<script src="./lua/other/text.js"></script>
+	<script src="./lua/other/math.js"></script>
+	<script src="./lua/other/procedures.js"></script>
+	<script src="./lua/other/motion.js"></script>
+	<script src="./lua/other/controls.js"></script>
+	<script src="./lua/other/events.js"></script>
+	<script src="./lua/other/sensing.js"></script>
+	<script src="./lua/other/operator.js"></script>
+	<script src="./lua/other/variables.js"></script>
   </head>
   <body>
     <noscript>

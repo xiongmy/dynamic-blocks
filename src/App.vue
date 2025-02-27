@@ -1,15 +1,14 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <blockly-box />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import BlocklyBox from './views/BlocklyBox.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    BlocklyBox
   }
 }
 </script>

@@ -1,0 +1,42 @@
+
+// {
+//     blockType: string 积木块类型  如'event', 'control'
+//     opcode: 积木块唯一标识  string 下划线相连
+//     Message: 积木块上的字符，% 是参数的占位符，位置与个数需要相对应
+//     argList: [  积木块的参数列表
+//         {
+//             argType: 'number',    // 参数类型('text', 'number')
+//             argName: 'ROTATION'   // 默认大写字符串
+//         }
+//     ]
+// }
+
+{
+    "blockType": "robot", 
+    "blocks": [
+        {
+            "opcode": "robot_run",  
+            "message": "robot run with speed %1 and rotation %2", 
+            "argList":[ 
+                {
+                    "argType": "number",  
+                    "argName": "SPEED"  
+                },
+                {
+                    "argType": "number",  
+                    "argName": "ROTATION"  
+                }
+            ]
+        },
+        {
+            "opcode": "robot_play",  
+            "message": "robot play audio %1", 
+            "argList":[ 
+                {
+                    "argType": "number",  
+                    "argName": "TEXT1"  
+                }  
+            ]
+        }
+    ]
+}
