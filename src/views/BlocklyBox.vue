@@ -1,8 +1,8 @@
 <template>
 	<div class="container">
-		<import-form @post-data="loadBlockly"/>
+		<import-form v-if="openImport" @post-data="loadBlockly"/>
 		<div class="blockly" id="blocklyDiv"></div>
-		<code-box />
+		<code-box :code="genCode"/>
 	</div>
 </template>
 <script>
@@ -16,11 +16,12 @@ let workspace = null
 export default defineComponent({
 	components: { CodeBox, ImportForm },
 	setup() {
+		const genCode = ref('')
+		const openImport = ref(false)
 		const blocksInit = (blocksData) => {
 			for (const block of blocksData.blocks) {
 				Blockly.Blocks[block.opcode] = {
 					init: function () {
-						console.log(block.message)
 						this.jsonInit({
 							// "message0": "robot play audio %1",
 							"message0": block.message,
@@ -76,45 +77,13 @@ export default defineComponent({
 		}
 
 		const genLuaCode = () => {
-			console.log(workspace)
 			let code = Blockly.Lua.genCode(workspace)
-			console.log(code)
-			// createCodeNode(code)
-			// window.hljs.highlightAll();
-			// window.hljs.initLineNumbersOnLoad();
+			genCode.value = code
 		}
 		const loadBlockly = (blocksData)=>{
-			// const blocksData = {
-			// 	"blockType": "robot",
-			// 	"blocks": [
-			// 		{
-			// 			"opcode": "robot_run",
-			// 			"message": "robot run with speed %1 and rotation %2",
-			// 			"argList": [
-			// 				{
-			// 					"argType": "number",
-			// 					"argName": "SPEED"
-			// 				},
-			// 				{
-			// 					"argType": "number",
-			// 					"argName": "ROTATION"
-			// 				}
-			// 			]
-			// 		},
-			// 		{
-			// 			"opcode": "robot_play",
-			// 			"message": "robot play audio %1",
-			// 			"argList": [
-			// 				{
-			// 					"argType": "number",
-			// 					"argName": "TEXT1"
-			// 				}
-			// 			]
-			// 		}
-			// 	]
-			// }
-			console.log(blocksData)
-			blocksInit(blocksData)
+			if(openImport.value){
+				blocksInit(blocksData)
+			}
 			workspace = Blockly.inject('blocklyDiv', {
 				comments: true,
 				disable: false,
@@ -123,7 +92,7 @@ export default defineComponent({
 				readOnly: false,
 				rtl: false,
 				scrollbars: true,
-				toolbox: getXml(blocksData),
+				toolbox: openImport.value ? getXml(blocksData): window.ToolBoxXml,
 				grid:
 				{
 					spacing: 20,
@@ -148,7 +117,6 @@ export default defineComponent({
 					dragShadowOpacity: 0.6
 				}
 			});
-			console.log(workspace)
 			//监听workspace的变化
 			workspace.addChangeListener((e) => {
 				// console.log(e)
@@ -156,16 +124,23 @@ export default defineComponent({
 					// console.log(workspace.blockDB_[e.blockId]?.callback())
 				}
 				if ((e.type == "move" || e.type == "ui")) {
-					// genLuaCode()  //todo
+					genLuaCode()					
 				}
 			});
 
 		}
 
 		onMounted(() => {
+			if(openImport.value){
+				// loadBlockly()
+			}else{
+				loadBlockly(window.ToolBoxXml)
+			}
 			
 		})
 		return {
+			genCode,
+			openImport,
 			loadBlockly
 		}
 	},

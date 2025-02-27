@@ -98,8 +98,6 @@ const blocksData = reactive({
 })
 
 const onSubmit = () => {
-	console.log('submit!')
-	console.log(blocksData)
 	emit('post-data', blocksData)
 	dialogVisible.value = false
 }
@@ -107,11 +105,9 @@ const onSubmit = () => {
 const dialogVisible = ref(true)
 
 const addArg = (block) => {
-	console.log(block)
 	block.argList.push({ argName: '', argType: '', default: '' })
 }
 const minArg = (block) => {
-	console.log(block)
 	if (block.argList.length) block.argList.pop()
 }
 const addBlock = () => {

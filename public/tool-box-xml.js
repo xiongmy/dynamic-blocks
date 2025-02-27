@@ -17,7 +17,6 @@ const motion = function(){
                 </shadow>
             </value>
         </block>
-        ${blockSeparator}
         <block type="move_motor_stop">
         </block>
     </category>`
@@ -259,7 +258,6 @@ const robot = function(){
 const everything = [
     xmlOpen,
     motion(),gap,
-    robot(),gap,
     events(),gap,
     controls(),gap,
     sensing(),gap,
@@ -269,7 +267,7 @@ const everything = [
     xmlClose
 ]
 
-const ToolBoxXml = everything.join('\n');
+window.ToolBoxXml = everything.join('\n');
 
 
 

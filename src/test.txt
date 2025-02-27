@@ -243,3 +243,34 @@
     </category>
     
 </xml>
+
+
+// const blocksData = {
+			// 	"blockType": "robot",
+			// 	"blocks": [
+			// 		{
+			// 			"opcode": "robot_run",
+			// 			"message": "robot run with speed %1 and rotation %2",
+			// 			"argList": [
+			// 				{
+			// 					"argType": "number",
+			// 					"argName": "SPEED"
+			// 				},
+			// 				{
+			// 					"argType": "number",
+			// 					"argName": "ROTATION"
+			// 				}
+			// 			]
+			// 		},
+			// 		{
+			// 			"opcode": "robot_play",
+			// 			"message": "robot play audio %1",
+			// 			"argList": [
+			// 				{
+			// 					"argType": "number",
+			// 					"argName": "TEXT1"
+			// 				}
+			// 			]
+			// 		}
+			// 	]
+			// }
