@@ -1,8 +1,8 @@
 <template>
 	<div class="container">
-		<import-form v-if="openImport" @post-data="loadBlockly"/>
+		<import-form v-if="openImport" @post-data="loadBlockly" />
 		<div class="blockly" id="blocklyDiv"></div>
-		<code-box :code="genCode"/>
+		<code-box :code="genCode" />
 	</div>
 </template>
 <script>
@@ -17,9 +17,7 @@ export default defineComponent({
 	components: { CodeBox, ImportForm },
 	setup() {
 		let params = new URLSearchParams(window.location.search);
-		console.log(params.get('auto'))
 		let isDynamic = !params.get('auto'); // "John"
-		console.log(isDynamic)
 		const genCode = ref('')
 		const openImport = ref(isDynamic)
 		const blocksInit = (blocksData) => {
@@ -43,6 +41,11 @@ export default defineComponent({
 				Blockly.Blocks[block.opcode].callback = () => {
 					console.log('do something')
 				}
+				Blockly.Lua[block.opcode] = (block) => {
+					// const text = block.getField('TEXT1')
+					const code = `test(111)\n`
+					return code;
+				}
 			}
 		}
 		const getXml = (blocksData) => {
@@ -51,7 +54,7 @@ export default defineComponent({
 					<category name="%{BKY_CATEGORY_EVENTS}" id="events" colour="#FFD500" secondaryColour="#CC9900">
 						<block type="event_whenflagclicked"></block>
 					</category>
-					<sep gap="36"/>		
+					<sep gap="36"/>
 			`
 			let mainXml = `<category name="${blocksData.category}" id="${blocksData.category}" colour="#9966FF" secondaryColour="#774DCB">`
 			for (const block of blocksData.blocks) {
@@ -60,7 +63,7 @@ export default defineComponent({
 					argXml = argXml + `
 					<value name="${arg.argName}">
 						<shadow type="${arg.argType}">
-							<field name="${arg.argType ==='text'?'TEXT':'NUM'}">${arg.default}</field>
+							<field name="${arg.argType === 'text' ? 'TEXT' : 'NUM'}">${arg.default}</field>
 						</shadow>
 					</value>
 				`
@@ -84,8 +87,8 @@ export default defineComponent({
 			let code = Blockly.Lua.genCode(workspace)
 			genCode.value = code
 		}
-		const loadBlockly = (blocksData)=>{
-			if(openImport.value){
+		const loadBlockly = (blocksData) => {
+			if (openImport.value) {
 				blocksInit(blocksData)
 			}
 			workspace = Blockly.inject('blocklyDiv', {
@@ -96,7 +99,7 @@ export default defineComponent({
 				readOnly: false,
 				rtl: false,
 				scrollbars: true,
-				toolbox: openImport.value ? getXml(blocksData): window.ToolBoxXml,
+				toolbox: openImport.value ? getXml(blocksData) : window.ToolBoxXml,
 				grid:
 				{
 					spacing: 20,
@@ -128,17 +131,17 @@ export default defineComponent({
 					// console.log(workspace.blockDB_[e.blockId]?.callback())
 				}
 				if ((e.type == "move" || e.type == "ui")) {
-					genLuaCode()					
+					genLuaCode()
 				}
 			});
 
 		}
 
 		onMounted(() => {
-			if(!openImport.value){
+			if (!openImport.value) {
 				loadBlockly(window.ToolBoxXml)
 			}
-			
+
 		})
 		return {
 			genCode,
@@ -170,7 +173,8 @@ export default defineComponent({
 	border-right: 1px solid #ddd;
 	border: 1px solid #ccc;
 }
-::v-deep.blocklyFlyout{
+
+::v-deep.blocklyFlyout {
 	background: #ccc;
 }
 
