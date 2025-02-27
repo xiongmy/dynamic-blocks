@@ -1,6 +1,6 @@
 <template>
 	<div style="text-align: left;" >
-		<h3>code</h3>
+		<h3>Lua</h3>
 		<highlightjs autodetect :code="code" />
 	</div>
 </template>

@@ -16,8 +16,12 @@ let workspace = null
 export default defineComponent({
 	components: { CodeBox, ImportForm },
 	setup() {
+		let params = new URLSearchParams(window.location.search);
+		console.log(params.get('auto'))
+		let isDynamic = !params.get('auto'); // "John"
+		console.log(isDynamic)
 		const genCode = ref('')
-		const openImport = ref(false)
+		const openImport = ref(isDynamic)
 		const blocksInit = (blocksData) => {
 			for (const block of blocksData.blocks) {
 				Blockly.Blocks[block.opcode] = {
@@ -131,9 +135,7 @@ export default defineComponent({
 		}
 
 		onMounted(() => {
-			if(openImport.value){
-				// loadBlockly()
-			}else{
+			if(!openImport.value){
 				loadBlockly(window.ToolBoxXml)
 			}
 			
