@@ -3,6 +3,11 @@
 		<import-form v-if="openImport" @post-data="loadBlockly" />
 		<div class="blockly" id="blocklyDiv"></div>
 		<code-box :code="genCode" />
+		<div class="run-box">
+			<el-icon :size="60">
+				<VideoPlay />
+			</el-icon>
+		</div>
 	</div>
 </template>
 <script>
@@ -169,13 +174,25 @@ export default defineComponent({
 	float: left;
 }
 
+.run-box {
+	position: fixed;
+	width: 100px;
+	height: 100%;
+	bottom: 0;
+	right: 30%;
+}
+
 .blocklyToolboxDiv {
 	border-right: 1px solid #ddd;
 	border: 1px solid #ccc;
 }
 
-::v-deep.blocklyFlyout {
+::v-deep .blocklyFlyout {
 	background: #ccc;
+}
+
+::v-deep .scratchCategoryMenu {
+	font-size: 0.7rem;
 }
 
 .blocklyFlyout {
